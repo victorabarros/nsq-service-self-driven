@@ -7,14 +7,14 @@ echo "                |_|  "
 
 
 echo && echo "Kill containers and images: "
-docker rm -f nsq_nsqadmin_1
-docker rm -f nsq_nsqd_1
-docker rm -f nsq_nsqlookupd_1
-docker rm -f nsq_nsqwriter_1
-docker rm -f nsq_nsqreader_1
-# images:
+docker rm -f nsq-service-self-driven_nsqadmin_1
+docker rm -f nsq-service-self-driven_nsqd_1
+docker rm -f nsq-service-self-driven_nsqlookupd_1
+docker rm -f nsq-service-self-driven_nsqwriter_1
+# docker rm -f nsq-service-self-driven_nsqreader_1
+# Images:
 docker rmi -f nsqio/nsq:v1.2.0
-# docker rmi -f nsq_nsqwriter
+docker rmi -f nsq-service-self-driven_nsqwriter
 # docker rmi -f golang:1.14
 
 echo && echo "Compose up: "
@@ -26,10 +26,10 @@ docker-compose ps
 echo && echo "Compose logs: "
 docker-compose logs
 
-echo && echo "Ping lookup: "
-curl http://127.0.0.1:4161/ping
+echo && echo "lookup ping : "
+curl http://127.0.0.1:4161/ping && echo
 
-echo && echo "status nsq: "
+echo && echo "nsqd status: "
 curl http://127.0.0.1:4151/stats
 
 echo && echo "Publishing first message and create a topic: "

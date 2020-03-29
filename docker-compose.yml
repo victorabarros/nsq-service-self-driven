@@ -22,10 +22,10 @@ services:
       - nsqlookupd  
     ports:
       - "4171:4171"
-  # nsqwriter:
-  #   build: ./writer/.
-  #   depends_on:
-  #     - nsqlookupd  
+  nsqwriter:
+    build: ./writer/.
+    depends_on:
+      - nsqlookupd  
   # nsqreader:
   #   image: golang:1.14
   #   command: sleep 9999 # substituir depois por um build
