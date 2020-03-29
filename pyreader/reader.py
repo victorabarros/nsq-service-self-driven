@@ -8,7 +8,7 @@ URL = 'nsqlookupd'
 PORT = 4161
 
 def handler(msg):
-    print(datetime.utcnow().isoformat()[11:],
+    print(datetime.utcnow().isoformat()[11:],  # TODO: usar format
           'msg: ',
           msg.body.decode())
     return True
