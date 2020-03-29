@@ -1,6 +1,6 @@
-# NSQ SELF SYSTEM
+# NSQ SERVICE SELF.DRIVEN
 ---
-NSQ Self.System it's a entire ecosystem in containers with publisher, message plataform and consumer.
+[NSQ](https://nsq.io/) Self.Driven it's a entire ecosystem in containers with publisher, message plataform and consumer.
 
 ## Usage
 ```sh
@@ -11,4 +11,4 @@ bash run.sh
 Pull requests are welcome.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](LICENCE)
