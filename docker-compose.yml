@@ -1,0 +1,35 @@
+# Based on https://nsq.io/deployment/docker.html#using-docker-compose
+version: '3'
+services:
+  nsqlookupd:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqlookupd
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+  nsqd:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+  nsqadmin:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd  
+    ports:
+      - "4171:4171"
+  # nsqwriter:
+  #   build: ./writer/.
+  #   depends_on:
+  #     - nsqlookupd  
+  # nsqreader:
+  #   image: golang:1.14
+  #   command: sleep 9999 # substituir depois por um build
+  #   depends_on:
+  #     - nsqwriter  
+
+# TODO: Second reader with python
