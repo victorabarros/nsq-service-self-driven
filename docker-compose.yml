@@ -30,10 +30,8 @@ services:
     build: ./pyreader/.
     depends_on:
       - writer
-  # nsqreader:
-  #   image: golang:1.14
-  #   command: sleep 9999 # substituir depois por um build
-  #   depends_on:
-  #     - writer
-
-# TODO: Second reader with python
+  goreader:
+    image: golang:1.14
+    command: sleep 9999 # substituir depois por um build
+    depends_on:
+      - writer

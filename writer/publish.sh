@@ -10,6 +10,6 @@ do
     NOW=$(date +%T)
     ID=$(uuidgen -r)
     echo "${ID}-${NOW}"
-    curl -d "${ID}-${NOW}" "${URL}:${PORT}/pub?topic=${TOPIC_NAME}"
+    curl -d "${ID} ${NOW}" "${URL}:${PORT}/pub?topic=${TOPIC_NAME}"
     sleep .2
 done
