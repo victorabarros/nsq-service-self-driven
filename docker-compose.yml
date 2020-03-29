@@ -19,17 +19,21 @@ services:
     image: nsqio/nsq:v1.2.0
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
     depends_on:
-      - nsqlookupd  
+      - nsqlookupd
     ports:
       - "4171:4171"
-  nsqwriter:
+  writer:
     build: ./writer/.
     depends_on:
-      - nsqlookupd  
+      - nsqlookupd
+  pyreader:
+    build: ./pyreader/.
+    depends_on:
+      - writer
   # nsqreader:
   #   image: golang:1.14
   #   command: sleep 9999 # substituir depois por um build
   #   depends_on:
-  #     - nsqwriter  
+  #     - writer
 
 # TODO: Second reader with python

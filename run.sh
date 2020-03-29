@@ -10,11 +10,13 @@ echo && echo "Kill containers and images: "
 docker rm -f nsq-service-self-driven_nsqadmin_1
 docker rm -f nsq-service-self-driven_nsqd_1
 docker rm -f nsq-service-self-driven_nsqlookupd_1
-docker rm -f nsq-service-self-driven_nsqwriter_1
+docker rm -f nsq-service-self-driven_writer_1
+docker rm -f nsq-service-self-driven_pyreader_1
 # docker rm -f nsq-service-self-driven_nsqreader_1
 # Images:
 docker rmi -f nsqio/nsq:v1.2.0
-docker rmi -f nsq-service-self-driven_nsqwriter
+docker rmi -f nsq-service-self-driven_writer
+docker rmi -f nsq-service-self-driven_pyreader
 # docker rmi -f golang:1.14
 
 echo && echo "Compose up: "
@@ -40,4 +42,5 @@ curl -X POST "http://127.0.0.1:4151/channel/create?topic=firsttopic&channel=pych
 
 echo && echo "Admin nsqadmin on: http://localhost:4171/topics/firsttopic"
 
+# TODO: how watch logs fom reader? Same on README
 echo
