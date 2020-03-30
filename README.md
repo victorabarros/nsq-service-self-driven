@@ -18,6 +18,11 @@ nsq-service-self-driven_writer_1       sh ./publish.sh                  Up
 ```sh
 bash run.sh
 ```
+Reader logs:
+```sh
+docker logs -f nsq-service-self-driven_goreader_1
+docker logs -f nsq-service-self-driven_pyreader_1
+```
 
 ## Contributing
 Pull requests are welcome.

@@ -1,10 +1,12 @@
-echo " _ __   ___   __ _   "
-echo "| '_ \ / __| / _' |  "
-echo "| | | |\__ \| (_| |  "  # TODO: Continue
-echo "|_| |_||___/ \__, |  "
-echo "                |_|  "
-
-
+echo "                                _   __  ______        _                    " && sleep .25
+echo "                               | | / _| |  _  \      (_)                   " && sleep .25
+echo " _ __   ___   __ _   ___   ___ | || |_  | | | | _ __  _ __   __ ___  _ __  " && sleep .25
+echo "| '_ \ / __| / _' | / __| / _ \| ||  _| | | | || '__|| |\ \ / // _ \| '_ \ " && sleep .25
+echo "| | | |\__ \| (_| | \__ \|  __/| || | _ | |/ / | |   | | \ V /|  __/| | | |" && sleep .25
+echo "|_| |_||___/ \__, | |___/ \___||_||_|(_)|___/  |_|   |_|  \_/  \___||_| |_|" && sleep .25
+echo "                | |                                                        " && sleep .25
+echo "                |_|                                                        " && sleep .25
+# from http://patorjk.com/software/taag font doom
 
 echo && echo "Kill containers and images: "
 docker rm -f nsq-service-self-driven_nsqadmin_1

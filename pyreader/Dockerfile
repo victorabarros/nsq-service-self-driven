@@ -1,3 +1,4 @@
+# TODO alpine or slim, whos better?
 FROM python:3.8-alpine
 
 COPY . .
