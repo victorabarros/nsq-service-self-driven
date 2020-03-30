@@ -1,4 +1,3 @@
-# Consumer inside of /nsqlookupd container
 from datetime import datetime
 import nsq
 
@@ -8,8 +7,7 @@ URL = 'nsqlookupd'
 PORT = 4161
 
 def handler(msg):
-    print(datetime.utcnow().isoformat()[11:],  # TODO: usar format
-          'msg: ',
+    print(f"[{datetime.utcnow().strftime('%H:%M:%S.%f')}] "+
           msg.body.decode())
     return True
 

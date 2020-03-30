@@ -1,4 +1,4 @@
-// from https://godoc.org/github.com/nsqio/go-nsq
+// Based on https://godoc.org/github.com/nsqio/go-nsq
 package main
 
 import (
