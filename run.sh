@@ -14,11 +14,11 @@ docker rm -f nsq-service-self-driven_writer_1
 docker rm -f nsq-service-self-driven_pyreader_1
 docker rm -f nsq-service-self-driven_goreader_1
 # Images:
-# docker rmi -f nsqio/nsq:v1.2.0
-# docker rmi -f nsq-service-self-driven_writer
-# docker rmi -f nsq-service-self-driven_pyreader
-# docker rmi -f nsq-service-self-driven_goreader
-# docker rmi -f golang:1.14-alpine
+docker rmi -f nsqio/nsq:v1.2.0
+docker rmi -f nsq-service-self-driven_writer
+docker rmi -f nsq-service-self-driven_pyreader
+docker rmi -f nsq-service-self-driven_goreader
+docker rmi -f golang:1.14-alpine
 
 echo && echo "compose up: "
 docker-compose up -d  # -d to don't lock terminal with logs
@@ -44,7 +44,7 @@ curl -X POST "http://127.0.0.1:4151/channel/create?topic=firsttopic&channel=goch
 
 echo && echo "nsqadmin on: http://localhost:4171/topics/firsttopic"
 
-echo && echo "goreader logs: docker logs -f nsq-service-self-driven_goreader_1" 
+echo && echo "goreader logs: docker logs -f nsq-service-self-driven_goreader_1"
 echo "pyreader logs: docker logs -f nsq-service-self-driven_pyreader_1"
 
 echo
