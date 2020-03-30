@@ -3,6 +3,9 @@ package main
 
 import (
     "fmt"
+    "os/signal"
+    "syscall"
+    "os"
     "github.com/nsqio/go-nsq"
 )
 
@@ -13,7 +16,7 @@ func (h *myMessageHandler) HandleMessage(m *nsq.Message) error {
         return nil
     }
 
-    fmt.Println(m.Body)
+    fmt.Println(string(m.Body))  // TODO: Adicionar utcnow à mensagem e observar delay.
     return nil
 }
 
@@ -35,5 +38,15 @@ func main() {
         fmt.Println(err)
     }
 
-    // consumer.Stop()
+    shutdown := make(chan os.Signal, 2)
+    signal.Notify(shutdown, syscall.SIGINT)
+
+    for {
+        select {
+        case <-consumer.StopChan:
+            return
+        case <-shutdown:
+            consumer.Stop()
+        }
+    }
 }

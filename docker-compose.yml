@@ -31,7 +31,6 @@ services:
     depends_on:
       - writer
   goreader:
-    image: golang:1.14
-    command: sleep 9999 # substituir depois por um build
+    build: ./goreader/.
     depends_on:
       - writer
