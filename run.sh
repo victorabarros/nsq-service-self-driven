@@ -1,19 +1,17 @@
-echo "                                                       " && sleep .25
-echo "                                                       " && sleep .25
-echo "                   _ __   ___   __ _                   " && sleep .25
-echo "                  | '_ \ / __| / _' |                  " && sleep .25
-echo "                  | | | |\__ \| (_| |                  " && sleep .25
-echo "                  |_| |_||___/ \__, |                  " && sleep .25
-echo "                                  | |                  " && sleep .25
-echo "                                  |_|                  " && sleep .25
-echo "            _   __  ______        _                    " && sleep .25
-echo "           | | / _| |  _  \      (_)                   " && sleep .25
-echo " ___   ___ | || |_  | | | | _ __  _ __   __ ___  _ __  " && sleep .25
-echo "/ __| / _ \| ||  _| | | | || '__|| |\ \ / // _ \| '_ \ " && sleep .25
-echo "\__ \|  __/| || | _ | |/ / | |   | | \ V /|  __/| | | |" && sleep .25
-echo "|___/ \___||_||_|(_)|___/  |_|   |_|  \_/  \___||_| |_|" && sleep .25
-echo "                                                       " && sleep .25
-echo "                                                       " && sleep .25
+echo "                   _ __   ___   __ _                   " && sleep .2
+echo "                  | '_ \ / __| / _' |                  " && sleep .2
+echo "                  | | | |\__ \| (_| |                  " && sleep .2
+echo "                  |_| |_||___/ \__, |                  " && sleep .2
+echo "                                  | |                  " && sleep .2
+echo "                                  |_|                  " && sleep .2
+echo "            _   __  ______        _                    " && sleep .2
+echo "           | | / _| |  _  \      (_)                   " && sleep .2
+echo " ___   ___ | || |_  | | | | _ __  _ __   __ ___  _ __  " && sleep .2
+echo "/ __| / _ \| ||  _| | | | || '__|| |\ \ / // _ \| '_ \ " && sleep .2
+echo "\__ \|  __/| || | _ | |/ / | |   | | \ V /|  __/| | | |" && sleep .2
+echo "|___/ \___||_||_|(_)|___/  |_|   |_|  \_/  \___||_| |_|" && sleep .2
+echo "                                                       " && sleep .2
+echo "                                                       " && sleep .2
 # from http://patorjk.com/software/taag font doom
 
 
