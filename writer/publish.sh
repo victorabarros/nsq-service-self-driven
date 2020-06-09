@@ -2,7 +2,7 @@ apk add --no-cache curl util-linux
 
 TOPIC_NAME="firsttopic"
 URL="nsqd"
-PORT="4151"  # TODO: Move commom variables to global envs(ports, topics and channels) or move to docker-compose
+PORT="4151"  # TODO: Move commom variables to global envs(ports, topics and channels) or move to docker-compose or Makefile
 
 while true
 do
