@@ -1,6 +1,6 @@
 # NSQ SERVICE SELF.DRIVEN
 
-[NSQ](https://nsq.io/) Self.Driven it's a entire ecosystem in containers with publisher, message plataform and consumer.
+[NSQ](https://nsq.io/) Self.Driven is an entire ecosystem in containers with publisher, message plataform and consumer.
 
 ```sh
 >>> docker-compose ps
@@ -17,24 +17,15 @@ nsq-service-self-driven_writer_1       sh ./publish.sh                  Up
 
 ## Usage
 
-```sh
-bash run.sh
-```
-
-Reader logs:
+`Makefile`
 
 ```sh
-docker logs -f nsq-service-self-driven_goreader_1
-docker logs -f nsq-service-self-driven_pyreader_1
+make remove-containers
+
+make up
+
+make status
 ```
-
-## TODO
-
-- go consumer: https://gist.github.com/140am/197772a9a25ea53d0685a9f11302c47c
-
-## Contributing
-
-Pull requests are welcome.
 
 ## License
 
