@@ -16,11 +16,10 @@ welcome:
 	@echo "${YELLOW}\__ \|  __/| || | _ | |/ / | |   | | \ V /|  __/| | | |${NOCOLOR}" && sleep .03
 	@echo "${YELLOW}|___/ \___||_||_|(_)|___/  |_|   |_|  \_/  \___||_| |_|${NOCOLOR}" && sleep .03
 	@echo "${YELLOW}                                                       ${NOCOLOR}" && sleep .03
-	@echo "${YELLOW}                                                       ${NOCOLOR}" && sleep .03
 	@# http://patorjk.com/software/taag font doom
 
 remove-containers:
-	@echo "${YELLOW}Killing containers:${NOCOLOR}"
+	@echo "${YELLOW}killing containers${NOCOLOR}"
 	@docker rm -f nsq-service-self-driven_nsqadmin_1 \
 		nsq-service-self-driven_nsqd_1 \
 		nsq-service-self-driven_nsqlookupd_1 \
@@ -29,16 +28,18 @@ remove-containers:
 		nsq-service-self-driven_goreader_1
 
 remove-images:
-	@echo "${YELLOW}Killing images:${NOCOLOR}"
+	@echo "${YELLOW}killing images${NOCOLOR}"
 	@docker rmi -f nsq-service-self-driven_writer \
 		nsq-service-self-driven_pyreader \
 		nsq-service-self-driven_goreader
 
 clean-up: remove-containers remove-images
 
-up: welcome remove-containers
+up: welcome remove-containers compose-up first-message
+
+compose-up:
+	@echo "${YELLOW}docker-compose up${NOCOLOR}"
 	@docker-compose up -d
-	@make first-message
 
 status:
 	docker-compose ps
