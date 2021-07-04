@@ -26,6 +26,8 @@ So before start read this chapter from official documentation to be ensurence ab
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker-Compose](https://docs.docker.com/compose/install/)
 
+Don't forget to [manage as non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
+
 ## NSQ setup
 
 To setup a docker-compose.yml with the NSQ services is extremely simple, the documentations already made this for us.
@@ -80,7 +82,81 @@ And add the new service to .yml file
       - nsqlookupd
 ```
 
+Now exec `docker-compose up` to start the project and see at `http://localhost:4171/topics/hello_world` the publisher filling the _Depth_ field.
+
+## Consumer
+
+NSQ has a lot of libaries to help on implementation.
+**[Client libraries](https://nsq.io/clients/client_libraries.html#client-libraries)**
+
+For this tutorial let's use Python:
+
+```py
+import nsq
+import sys
+
+sys.stdout.flush()
+
+def handler(msg):
+    print(msg.body.decode(), flush=True)
+    return True
+
+if __name__ == "__main__":
+    r = nsq.Reader(message_handler=handler,
+                   lookupd_http_addresses=['nsqlookupd:4161'],
+                   topic="hello_world",
+                   channel="pychann",
+                   lookupd_poll_interval=15)
+
+    nsq.run()
+```
+
+Dockerfile:
+
+```Dockerfile
+FROM python
+
+COPY . .
+
+RUN pip3 install --no-cache pynsq
+
+ENTRYPOINT ["python3"]
+CMD ["reader.py"]
+```
+
+Add to .yml:
+
+```yml
+  consumer:
+    build: ./pyreader/.
+    depends_on:
+      - publisher
+```
+
+Now you ca see the message published printing on console and follow the counter here `http://localhost:4171/topics/hello_world/pychann` and realtime in all channels here `http://localhost:4171/counter`.
+
+[screenshot]
+
+## Project Tree
+
+```md
+/nsq-project/
+|-- docker-compose.yml
+|-- pyreader/
+|   |-- Dockerfile
+|   |-- reader.py
+|-- publisher/
+|   |-- Dockerfile
+|   |-- publish.sh
+```
+
+## More Information
+
+At the repository [nsq-service-self-driven](https://github.com/victorabarros/nsq-service-self-driven) you can se this same project with more funcionalities and with a consumer in go.
+
+I hope you enjoy! =D
+
 ## References
 
 https://youtu.be/CL_SUzXIUuI
-https://nsq.io/overview/design.html
+https://nsq.io/
