@@ -133,9 +133,13 @@ Add to .yml:
       - publisher
 ```
 
-Now you ca see the message published printing on console and follow the counter here `http://localhost:4171/topics/hello_world/pychann` and realtime in all channels here `http://localhost:4171/counter`.
+Now you ca see the message published printing on console:
 
 [screenshot]
+
+Or follow the counter here `http://localhost:4171/topics/hello_world/pychann` and realtime in all channels here `http://localhost:4171/counter`.
+
+[screenshots]
 
 ## Project Tree
 
@@ -150,7 +154,7 @@ Now you ca see the message published printing on console and follow the counter 
 |   |-- publish.sh
 ```
 
-## More Information
+## More Informations
 
 At the repository [nsq-service-self-driven](https://github.com/victorabarros/nsq-service-self-driven) you can se this same project with more funcionalities and with a consumer in go.
 
