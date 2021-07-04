@@ -1,6 +1,4 @@
-apk add --no-cache curl util-linux
-
-TOPIC_NAME="firsttopic"
+TOPIC_NAME="hello_world"
 URL="nsqd"
 PORT="4151"  # TODO: Move commom variables to global envs(ports, topics and channels) or move to docker-compose or Makefile
 
