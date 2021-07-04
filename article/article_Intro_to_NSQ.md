@@ -30,20 +30,35 @@ So before start read this chapter from official documentation to be ensurence ab
 
 To setup a docker-compose.yml with the NSQ services is extremely simple, the documentations already made this for us.
 [docker-compose.yml NSQ services](https://nsq.io/deployment/docker.html#using-docker-compose).
-And now already is possible to watch the nsqadmin on port `4171`.
+And now already is possible to watch the nsqadmin on `http://localhost:4171/`.
 
 With the admin service you can watch the topics, channels and queue counters.
 
 [screenshot]
 
-To send your first message, the nsqd server exposes an endpoint to receive events. In the following example, I'm sending an empty payload to the `helloWorld` topic, that doesn't exist yet, but the nsqd server will automatically create.
+To send your first message, the nsqd server exposes an endpoint to receive events. In the following example, I'm sending an empty payload to the `hello_world` topic, that doesn't exist yet, but the nsqd server will automatically create.
 
-`curl -d "{}" http://localhost:4151/pub?topic=helloWorld`
+`curl -d "{}" http://localhost:4151/pub?topic=hello_world`
 
 And here you can see all services endpoints that allow you to manage the topics and channels:
 
 **[nsqd http api](https://nsq.io/components/nsqd.html#http-api)**
 **[nsqlookupd http interface](https://nsq.io/components/nsqlookupd.html#http-interface)**
+
+## Publisher
+
+As we already saw, with a simple `curl` command is possible to publish messages.
+So let's code a script that iterates and execute curl command:
+
+```sh
+while true
+do
+    NOW=$(date +%T)
+    ID=$(uuidgen -r)
+    curl -d "${ID} ${NOW}" "localhost:4151/pub?topic=hello_world"
+    sleep 2
+done
+```
 
 ## References
 
