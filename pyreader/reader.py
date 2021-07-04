@@ -1,14 +1,17 @@
 from datetime import datetime
 import nsq
+import sys
 
-TOPIC = 'firsttopic'
+TOPIC = 'hello_world'
 CHANNEL = 'pychann'
 URL = 'nsqlookupd'
 PORT = 4161
 
+sys.stdout.flush()
+
 def handler(msg):
     print(f"[{datetime.utcnow().strftime('%H:%M:%S.%f')}]",
-          msg.body.decode())
+          msg.body.decode(), flush=True)
     return True
 
 if __name__ == "__main__":
