@@ -16,13 +16,13 @@ func (h *myMessageHandler) HandleMessage(m *nsq.Message) error {
         return nil
     }
 
-    fmt.Println(string(m.Body))  // TODO: Adicionar utcnow à mensagem e observar delay.
+    fmt.Println(string(m.Body))  // TODO add utcnow and watch delay.
     return nil
 }
 
 func main() {
     config := nsq.NewConfig()
-    topic := "firsttopic"
+    topic := "hello_world"
     channel := "gochann"
     lookup_url := "nsqlookupd:4161"
 

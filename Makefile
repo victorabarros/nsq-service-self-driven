@@ -23,13 +23,13 @@ remove-containers:
 	@docker rm -f nsq-service-self-driven_nsqadmin_1 \
 		nsq-service-self-driven_nsqd_1 \
 		nsq-service-self-driven_nsqlookupd_1 \
-		nsq-service-self-driven_writer_1 \
+		nsq-service-self-driven_publisher_1 \
 		nsq-service-self-driven_pyreader_1 \
 		nsq-service-self-driven_goreader_1
 
 remove-images:
 	@echo "${YELLOW}killing images${NOCOLOR}"
-	@docker rmi -f nsq-service-self-driven_writer \
+	@docker rmi -f nsq-service-self-driven_publisher \
 		nsq-service-self-driven_pyreader \
 		nsq-service-self-driven_goreader
 
@@ -40,6 +40,9 @@ up: welcome remove-containers compose-up first-message
 compose-up:
 	@echo "${YELLOW}docker-compose up${NOCOLOR}"
 	@docker-compose up -d
+
+log:
+	@docker-compose logs -f
 
 status:
 	docker-compose ps

@@ -1,4 +1,3 @@
-# TODO: alpine or slim, whos better?
 FROM golang:1.14-alpine
 
 COPY . .
