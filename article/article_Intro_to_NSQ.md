@@ -1,8 +1,8 @@
 # Introduction to NSQ with Docker
 
-## Disclaimer
+## Intro
 
-In the last year, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, even-driven architecture …
+In the last year, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture …
 
 So, this is not an article about event, but about **NSQ**, probably the simplest tool that can make your system event-friendly.
 
@@ -12,12 +12,12 @@ In the following steps, I'll describe a tutorial to make your system up and runn
 
 ## NSQ
 
-Here I'll not going deep on NSQ anatomy, the official web site has a excelent [_documentation_](https://nsq.io/) about this.
+Here I'll not go deep on NSQ anatomy, the official website has excelent [_documentation_](https://nsq.io/) about this.
 
 But to begin, it's important to know the basics about how the event drives inside the system.
-So before start read this chapter from official documentation to be ensurence about the nexts steps.
+So before start read this chapter from official documentation to be ensurence about the next steps.
 
-[Simplifying Configuration and Administration](https://nsq.io/overview/design.html#simplifying-configuration-and-administration)
+[Internals](https://nsq.io/overview/internals.html#internals)
 
 [.gif]
 
@@ -26,13 +26,24 @@ So before start read this chapter from official documentation to be ensurence ab
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker-Compose](https://docs.docker.com/compose/install/)
 
-## docker-compose.yml
+## NSQ setup
 
-To setup a docker-compose.yml with the NSQ services is extremimly simple, the documentations already made this for us.
+To setup a docker-compose.yml with the NSQ services is extremely simple, the documentations already made this for us.
 [docker-compose.yml NSQ services](https://nsq.io/deployment/docker.html#using-docker-compose).
 And now already is possible to watch the nsqadmin on port `4171`.
 
-With admin service you can watch the topics, channels and queue counters.
+With the admin service you can watch the topics, channels and queue counters.
+
+[screenshot]
+
+To send your first message, the nsqd server exposes an endpoint to receive events. In the following example, I'm sending an empty payload to the `helloWorld` topic, that doesn't exist yet, but the nsqd server will automatically create.
+
+`curl -d "{}" http://localhost:4151/pub?topic=helloWorld`
+
+And here you can see all services endpoints that allow you to manage the topics and channels:
+
+**[nsqd http api](https://nsq.io/components/nsqd.html#http-api)**
+**[nsqlookupd http interface](https://nsq.io/components/nsqlookupd.html#http-interface)**
 
 ## References
 
