@@ -6,7 +6,7 @@ while true
 do
     NOW=$(date +%T)
     ID=$(uuidgen -r)
-    echo "${ID}-${NOW}"
+    printf "\n${ID}-${NOW}\n"
     curl -d "${ID} ${NOW}" "${URL}:${PORT}/pub?topic=${TOPIC_NAME}"
     sleep 2
 done

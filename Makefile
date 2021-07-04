@@ -35,7 +35,7 @@ remove-images:
 
 clean-up: remove-containers remove-images
 
-up: welcome remove-containers compose-up first-message
+start: welcome remove-containers compose-up first-message
 
 compose-up:
 	@echo "${YELLOW}docker-compose up${NOCOLOR}"
