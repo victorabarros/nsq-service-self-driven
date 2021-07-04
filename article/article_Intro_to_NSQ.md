@@ -8,7 +8,7 @@ So, this is not an article about event, but about **NSQ**, probably the simplest
 
 [_NSQ is a realtime distributed messaging platform_](https://nsq.io/) ready to run in super easies steps. But, to make this case even more professional, let's use [Docker](https://www.docker.com/)!
 
-In the following steps, I'll describe a tutorial to make your system up and running with NSQ, publisher and consumer (in Go and Python). All them containerized.
+In the following steps, I'll describe a tutorial to make your system up and running with NSQ, publisher and consumer in Python. All them containerized.
 
 ## NSQ
 
@@ -29,7 +29,9 @@ So before start read this chapter from official documentation to be ensurence ab
 ## NSQ setup
 
 To setup a docker-compose.yml with the NSQ services is extremely simple, the documentations already made this for us.
+Don't forget to mirror the nsqd and nsqadmin ports to use localhost.
 [docker-compose.yml NSQ services](https://nsq.io/deployment/docker.html#using-docker-compose).
+
 And now already is possible to watch the nsqadmin on `http://localhost:4171/`.
 
 With the admin service you can watch the topics, channels and queue counters.
@@ -53,11 +55,29 @@ So let's code a script that iterates and execute curl command:
 ```sh
 while true
 do
-    NOW=$(date +%T)
-    ID=$(uuidgen -r)
-    curl -d "${ID} ${NOW}" "localhost:4151/pub?topic=hello_world"
+    curl -d "{\"foo\":\"bar\"}" "nsqd:4151/pub?topic=hello_world"
     sleep 2
 done
+```
+
+Now `Dockerfile`:
+
+```Dockerfile
+FROM alpine
+
+COPY ./publish.sh ./publish.sh
+RUN apk add --no-cache curl
+
+ENTRYPOINT ["sh", "./publish.sh"]
+```
+
+And add the new service to .yml file
+
+```yml
+  publisher:
+    build: ./publisher/.
+    depends_on:
+      - nsqlookupd
 ```
 
 ## References
