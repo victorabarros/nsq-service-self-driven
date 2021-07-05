@@ -10,6 +10,7 @@ PORT = 4161
 sys.stdout.flush()
 
 def handler(msg):
+    # TODO improve print as here
     print(f"[{datetime.utcnow().strftime('%H:%M:%S.%f')}]",
           msg.body.decode(), flush=True)
     return True
