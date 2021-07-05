@@ -198,21 +198,22 @@ Como podemos ver, subir um projeto de ponta a ponta com NSQ leva menos de 70 lin
 
 ## More Informations
 
-At the repository [nsq-service-self-driven](https://github.com/victorabarros/nsq-service-self-driven) you can se this same project with more funcionalities and with a consumer in go.
+At github.com/victorabarros/nsq-service-self-driven you can se this same project with more funcionalities and with a consumer in go.
 
 I hope you enjoy! =D
 
 ## References
 
-- NSQ introduction https://youtu.be/CL_SUzXIUuI
+- NSQ introduction in gophercon 2014 https://youtu.be/CL_SUzXIUuI
 - NSQ documentation https://nsq.io/
+  - nsqd server routes https://nsq.io/components/nsqd.html#http-api
+  - nsqlookupd server routes https://nsq.io/components/nsqlookupd.html#http-interface
+  - using docker-compose on nsq https://nsq.io/deployment/docker.html#using-docker-compose
+  - nsq client libraries https://nsq.io/clients/client_libraries.html#client-libraries
 - docker documentation https://www.docker.com/
 - how to install docker https://docs.docker.com/engine/install/
-- manage docker as non root user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
-- how to install docker-compose https://docs.docker.com/compose/install/
-- using docker-compose on nsq https://nsq.io/deployment/docker.html#using-docker-compose).
-- nsqd server routes https://nsq.io/components/nsqd.html#http-api
-- nsqlookupd server routes https://nsq.io/components/nsqlookupd.html#http-interface
-- nsq client libraries https://nsq.io/clients/client_libraries.html#client-libraries
-- github project https://github.com/victorabarros/nsq-service-self-driven
+  - manage docker as non root user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
+  - how to install docker-compose https://docs.docker.com/compose/install/
 - nsq official docker image https://hub.docker.com/r/nsqio/nsq
+- nsq repository https://github.com/nsqio/nsq
+- github project https://github.com/victorabarros/nsq-service-self-driven
