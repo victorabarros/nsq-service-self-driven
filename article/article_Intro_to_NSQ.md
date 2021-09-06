@@ -3,23 +3,23 @@
 ## Intro
 
 In the last year, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture …
+And already exists tons of good content about this on the internet and many tools to apply these concepts. Here I'll describe a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker**.
 <!--
 Buscando conhecimento sobre o assunto vi que a teoria básica é tão simples quanto imaginar um serviço q recebe payloads ordenados em filas que serão consumidas por outros serviços, podendo ou não ser dstribuidas de forma randomica entre os consumidores ou duplicadas.
 Mas quando olhamos as opções de prateleiras podemos ficar perdidos na variedade e complexidade.
 Nesta aventura, uma opção que me chocou diante de sua SIMPLICIDADE foi o NSQ.
 -->
-So, this is not an article about the event paradigm, but about **NSQ**, probably the simplest tool that can make your system event-friendly.
+Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest tool that can make your system event-friendly.
 <!-- _NSQ is a realtime distributed messaging platform_ ready to run in super easies steps. -->
 <!-- I'll not speend time explaining about NSQ and your features, the official documentation makes a great job. -->
 <!-- But, to make this case even more professional, let's use Docker
 -->
-In the following steps, I'll describe a tutorial to make your own system up and running with NSQ, publisher and consumer. All them containerized with Docker.
 
 ## NSQ
 
 I'll not go deep on NSQ anatomy, the official website has excelent documentation about this.
 But to begin, it's important to know the basics about how the NSQ drives inside the system.
-When a publisher sends an event to the topic **clicks**, the message is cloned to all the channels of the topic and then the message is delivered **randomicamente?????** to one consumer.
+When a publisher sends an event to the topic **clicks**, the message is cloned to all the channels of the topic and then the message is delivered randomly to one consumer.
 <!-- So before start read this chapter from official documentation to be ensurence about the next steps. -->
 
 <p align="center">
