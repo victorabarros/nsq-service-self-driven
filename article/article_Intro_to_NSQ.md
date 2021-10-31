@@ -2,8 +2,9 @@
 
 ## Intro
 
-In the last year, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture …
-And already exists tons of good content about this on the internet and many tools to apply these concepts. Here I'll describe a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker**.
+In the last years, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture …
+And already exists tons of good content about this on the internet and many tools to apply these concepts.
+Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker**.
 <!--
 Buscando conhecimento sobre o assunto vi que a teoria básica é tão simples quanto imaginar um serviço q recebe payloads ordenados em filas que serão consumidas por outros serviços, podendo ou não ser dstribuidas de forma randomica entre os consumidores ou duplicadas.
 Mas quando olhamos as opções de prateleiras podemos ficar perdidos na variedade e complexidade.
@@ -17,13 +18,14 @@ Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest t
 
 ## NSQ
 
-I'll not go deep on NSQ anatomy, the official website has excelent documentation about this.
+I'll not go deep on NSQ anatomy, the official website has excelent documentation about that.
 But to begin, it's important to know the basics about how the NSQ drives inside the system.
 When a publisher sends an event to the topic **clicks**, the message is cloned to all the channels of the topic and then the message is delivered randomly to one consumer.
 <!-- So before start read this chapter from official documentation to be ensurence about the next steps. -->
 
 <p align="center">
     <img src="./data_flow.gif" />
+    <!-- Font: https://nsq.io/overview/design.html#simplifying-configuration-and-administration -->
   </a>
 </p>
 
@@ -39,7 +41,7 @@ The NSQ is compose of 3 services:
   - web UI to introspect the cluster
 
 Is possible start all them from the same official docker images `nsqio/nsq`.
-Whit this, write the `docker-compose.yml` is very easy:
+With that, write the `docker-compose.yml` is very easy:
 
 ```yml
 version: "3"
@@ -78,7 +80,7 @@ To send your first message, the nsqd server exposes an endpoint to receive event
 
 `curl -d "{}" http://localhost:4151/pub?topic=hello_world`
 
-The nsqd and nsqlookupd exposes a list of endpoints that allow you to manage the topics, channels and monitoring the service.
+The [nsqd and nsqlookupd](##References) exposes a list of endpoints that allow you to manage the topics, channels and monitoring the service.
 
 ## Publisher
 
@@ -204,16 +206,16 @@ I hope you enjoy! =D
 
 ## References
 
-- NSQ introduction in gophercon 2014 https://youtu.be/CL_SUzXIUuI
-- NSQ documentation https://nsq.io/
-  - nsqd server routes https://nsq.io/components/nsqd.html#http-api
-  - nsqlookupd server routes https://nsq.io/components/nsqlookupd.html#http-interface
-  - using docker-compose on nsq https://nsq.io/deployment/docker.html#using-docker-compose
-  - nsq client libraries https://nsq.io/clients/client_libraries.html#client-libraries
-- docker documentation https://www.docker.com/
-- how to install docker https://docs.docker.com/engine/install/
-  - manage docker as non root user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
-  - how to install docker-compose https://docs.docker.com/compose/install/
-- nsq official docker image https://hub.docker.com/r/nsqio/nsq
-- nsq repository https://github.com/nsqio/nsq
-- github project https://github.com/victorabarros/nsq-service-self-driven
+- NSQ introduction in gophercon 2014 <https://youtu.be/CL_SUzXIUuI>
+- NSQ documentation <https://nsq.io/>
+  - nsqd server routes <https://nsq.io/components/nsqd.html#http-api>
+  - nsqlookupd server routes <https://nsq.io/components/nsqlookupd.html#http-interface>
+  - using docker-compose on nsq <https://nsq.io/deployment/docker.html#using-docker-compose>
+  - nsq client libraries <https://nsq.io/clients/client_libraries.html#client-libraries>
+- docker documentation <https://www.docker.com/>
+- how to install docker <https://docs.docker.com/engine/install/>
+  - manage docker as non root user <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>).
+  - how to install docker-compose <https://docs.docker.com/compose/install/>
+- nsq official docker image <https://hub.docker.com/r/nsqio/nsq>
+- nsq repository <https://github.com/nsqio/nsq>
+- github project <https://github.com/victorabarros/nsq-service-self-driven>
