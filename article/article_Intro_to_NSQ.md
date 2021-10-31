@@ -80,7 +80,7 @@ To send your first message, the nsqd server exposes an endpoint to receive event
 
 `curl -d "{}" http://localhost:4151/pub?topic=hello_world`
 
-The [nsqd and nsqlookupd](##References) exposes a list of endpoints that allow you to manage the topics, channels and monitoring the service.
+The [nsqd and nsqlookupd](#References) exposes a list of endpoints that allow you to manage the topics, channels and monitoring the service.
 
 ## Publisher
 
