@@ -1,6 +1,6 @@
-FROM alpine:3.11
+FROM alpine:3.15.0
 
-COPY ./publish.sh ./publish.sh
+COPY ./run.sh ./run.sh
 RUN apk add --no-cache curl util-linux
 
-ENTRYPOINT ["sh", "./publish.sh"]
+ENTRYPOINT ["sh", "./run.sh"]

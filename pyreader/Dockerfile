@@ -1,8 +1,8 @@
-FROM python:3.8-alpine
+FROM python:3.10-alpine
 
 COPY . .
 
 RUN pip3 install --no-cache pynsq
 
 ENTRYPOINT ["python3"]
-CMD ["reader.py"]
+CMD ["app.py"]
