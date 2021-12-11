@@ -2,7 +2,7 @@
 
 ## Intro
 
-On the last years, one of the most popular buzzword in the technology scenarios was **event**:
+In the last years, one of the most popular buzzword in the technology scenarios was **event**:
 Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture…
 And already exists tons of good content about these on internet and many tools to apply them.
 Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Python** and **Docker/Docker-Compose**.
@@ -11,7 +11,7 @@ Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest t
 
 ## NSQ
 
-I'll not go deep on NSQ anatomy, the official website has excelent documentation about that.
+I'll not go deep on NSQ anatomy, the official website has excellent documentation about that.
 But to begin, it's important to know the basics about how the NSQ drives inside the system.
 When a publisher sends an event to the topic **clicks**, the message is cloned to all the channels of the topic and then the message is delivered randomly to one consumer.
 
@@ -23,7 +23,7 @@ When a publisher sends an event to the topic **clicks**, the message is cloned t
 
 ### NSQ setup
 
-The NSQ is compose of 3 services:
+The NSQ is composed of 3 services:
 
 - **nsqd**
   - manage the messages
@@ -32,7 +32,7 @@ The NSQ is compose of 3 services:
 - **nsqadmin**
   - web UI to introspect the cluster
 
-Is possible start all them from the same official docker images `nsqio/nsq`.
+Is possible to start all them from the same official docker images `nsqio/nsq`.
 
 ## Hands on
 
@@ -43,7 +43,7 @@ Is possible start all them from the same official docker images `nsqio/nsq`.
 
 ### Step One - docker-compose
 
-First create an directory to the project
+First, create a directory to the project
 
 ```sh
 mkdir nsq-tutorial
@@ -87,12 +87,12 @@ Now is possible to run `docker-compose up` and _voilá_ watch the nsqadmin on `h
 ### Step Two - Publisher
 
 To send your first message, the nsqd server exposes an endpoint to receive events.
-The following command illustrate how send an empty payload to the `hello_world` topic.
+The following command illustrates how to send an empty payload to the `hello_world` topic.
 This topic doesn't exist yet, but the nsqd server will automatically create it.
 
 `curl -d "{}" http://localhost:4151/pub?topic=hello_world`
 
-Now we now how publish messages, let's code an script to automatize that.
+Now we know how to publish messages, let's code a script to automatize that.
 
 ```sh
 mkdir publisher
@@ -137,16 +137,16 @@ Now exec `docker-compose up` to start the project and see at `http://localhost:4
 
 ### Step Three - Python Consumer
 
-NSQ has a lot of libaries to help on implementation.
+NSQ has a lot of libraries to help with implementation.
 Let' start with python one:
 
-First create the directory on root of the project.
+First, create the directory on the root of the project.
 
 ```sh
 mkdir pyreader
 ```
 
-The library make ower life much easier, these few lines is enougth to read the messages.
+The library makes ower life much easier, these few lines are enough to read the messages.
 Write the `pyreader/app.py`.
 
 ```py
@@ -218,12 +218,12 @@ Or follow the counter here `http://localhost:4171/topics/tutorial/pychann` and r
 
 ## Conclusion
 
-See how easy and quickly is develop a event system?
+See how easy and quickly is develop an event system?
 
 NSQ is an elegant solution with super easy introduction.
-I highly recommend read more in its documetation how and study
+I highly recommend read more in its documentation how and study
 
-At github.com/victorabarros/nsq-service-self-driven you can se this project and more features, like Makefile and consumer writenn in Golang.
+At github.com/victorabarros/nsq-service-self-driven you can see this project and more features, like Makefile and consumer written in Golang.
 
 I hope you enjoy! =D
 
