@@ -2,14 +2,10 @@
 
 ## Intro
 
-In the last years, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture …
-And already exists tons of good content about this on the internet and many tools to apply these concepts.
-Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker**.
-<!--
-Buscando conhecimento sobre o assunto vi que a teoria básica é tão simples quanto imaginar um serviço q recebe payloads ordenados em filas que serão consumidas por outros serviços, podendo ou não ser dstribuidas de forma randomica entre os consumidores ou duplicadas.
-Mas quando olhamos as opções de prateleiras podemos ficar perdidos na variedade e complexidade.
-Nesta aventura, uma opção que me chocou diante de sua SIMPLICIDADE foi o NSQ.
--->
+On the last years, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture…
+And already exists tons of good content about these on internet and many tools to apply them.
+Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker/Docker-Compose**.
+
 Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest tool that can make your system event-friendly.
 <!-- _NSQ is a realtime distributed messaging platform_ ready to run in super easies steps. -->
 <!-- I'll not speend time explaining about NSQ and your features, the official documentation makes a great job. -->
@@ -21,7 +17,6 @@ Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest t
 I'll not go deep on NSQ anatomy, the official website has excelent documentation about that.
 But to begin, it's important to know the basics about how the NSQ drives inside the system.
 When a publisher sends an event to the topic **clicks**, the message is cloned to all the channels of the topic and then the message is delivered randomly to one consumer.
-<!-- So before start read this chapter from official documentation to be ensurence about the next steps. -->
 
 <p align="center">
     <img src="./data_flow.gif" />
@@ -29,7 +24,7 @@ When a publisher sends an event to the topic **clicks**, the message is cloned t
   </a>
 </p>
 
-## NSQ setup
+### NSQ setup
 
 The NSQ is compose of 3 services:
 
@@ -41,7 +36,23 @@ The NSQ is compose of 3 services:
   - web UI to introspect the cluster
 
 Is possible start all them from the same official docker images `nsqio/nsq`.
-With that, write the `docker-compose.yml` is very easy:
+
+## Hands on
+
+### Requiremets
+
+- Docker
+- Docker-Compose
+
+### Step One - docker-compose
+
+First create an directory to the project
+
+```sh
+mkdir nsq-service-self-driven
+```
+
+Inside that, write the `docker-compose.yml`:
 
 ```yml
 version: "3"
@@ -69,34 +80,43 @@ services:
       - "4171:4171"
 ```
 
-And now already is possible run `docker-compose up` and watch the nsqadmin on `http://localhost:4171/`.
+Now is possible to run `docker-compose up` and _voilá_ watch the nsqadmin on `http://localhost:4171/`.
 
 <p align="center">
     <img width="800" src="./nsqadmin_home.png" />
   </a>
 </p>
 
-To send your first message, the nsqd server exposes an endpoint to receive events. The following example is sending an empty payload to the `hello_world` topic, that doesn't exist yet, but the nsqd server will automatically create.
+### Step Two - Publisher
+
+To send your first message, the nsqd server exposes an endpoint to receive events.
+The following command illustrate how send an empty payload to the `hello_world` topic.
+This topic doesn't exist yet, but the nsqd server will automatically create it.
 
 `curl -d "{}" http://localhost:4151/pub?topic=hello_world`
 
-The [nsqd and nsqlookupd](#References) exposes a list of endpoints that allow you to manage the topics, channels and monitoring the service.
+<!--
+~Add screenshot or .gif~
+Is possible follow on lookup screen
+-->
 
-## Publisher
+Now we now how publish messages, let's code an script to automatize that.
 
-With a such easy when to publish message using `curl` command, let's code an script to automatize the publisher.
-<!-- As we already saw, with a simple `curl` command is possible to publish messages.
-So let's code a script that iterates and execute curl command: -->
+```sh
+mkdir publisher
+```
+
+On publisher directory, write `publisher/publish.sh`:
 
 ```sh
 while true
 do
     curl -d "{\"foo\":\"bar\"}" "nsqd:4151/pub?topic=hello_world"
-    sleep 2
+    sleep 1
 done
 ```
 
-`Dockerfile`:
+And to host the service, write its `publisher/Dockerfile`:
 
 ```Dockerfile
 FROM alpine
@@ -107,7 +127,7 @@ RUN apk add --no-cache curl
 ENTRYPOINT ["sh", "./publish.sh"]
 ```
 
-Add the new service to .yml file
+Add the new service to `docker-compose.yml` file
 
 ```yml
   publisher:
@@ -120,10 +140,14 @@ Now exec `docker-compose up` to start the project and see at `http://localhost:4
 
 [screenshot]
 
-## Consumer
+### Step Three - Consumer
 
 NSQ has a lot of libaries to help on implementation.
-For this tutorial let's use the python one:
+Let' start with python one:
+
+```sh
+mkdir pyreader
+```
 
 ```py
 import nsq
