@@ -2,11 +2,12 @@
 
 ## Intro
 
-On the last years, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture…
+On the last years, one of the most popular buzzword in the technology scenarios was **event**:
+Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture…
 And already exists tons of good content about these on internet and many tools to apply them.
 Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Python** and **Docker/Docker-Compose**.
 
-Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest tool that can make your system event-friendly.
+Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest tool that can make your own system event-friendly.
 
 ## NSQ
 
@@ -78,10 +79,8 @@ services:
 
 Now is possible to run `docker-compose up` and _voilá_ watch the nsqadmin on `http://localhost:4171/`.
 
-On **Counter** screen is possible follow the messages processed.
-
 <p align="center">
-    <img width="800" src="./nsqadmin_counter_0.png" />
+    <img width="800" src="./nsqadmin_home.png" />
   </a>
 </p>
 
@@ -92,11 +91,6 @@ The following command illustrate how send an empty payload to the `hello_world` 
 This topic doesn't exist yet, but the nsqd server will automatically create it.
 
 `curl -d "{}" http://localhost:4151/pub?topic=hello_world`
-
-<!--
-~Add screenshot or .gif~
-Is possible follow on lookup screen
--->
 
 Now we now how publish messages, let's code an script to automatize that.
 
@@ -134,9 +128,12 @@ Add the new service to `docker-compose.yml` file
       - nsqlookupd
 ```
 
-Now exec `docker-compose up` to start the project and see at `http://localhost:4171/topics/hello_world` the publisher filling the _Depth_ field.
+Now exec `docker-compose up` to start the project and see at `http://localhost:4171/topics/tutorial` the publisher filling the _Depth_ field.
 
-[screenshot]
+<p align="center">
+    <img width="800" src="./nsqadmin_topic_tutorial.png" />
+  </a>
+</p>
 
 ### Step Three - Python Consumer
 
@@ -198,11 +195,12 @@ Run `docker-compose build` and `docker-compose up` on root and now you can see t
   </a>
 </p>
 
-Or follow the counter here `http://localhost:4171/topics/hello_world/pychann` and realtime in all channels here `http://localhost:4171/counter`.
+Or follow the counter here `http://localhost:4171/topics/tutorial/pychann` and realtime in all channels here `http://localhost:4171/counter`.
 
 <p align="center">
     <img width="800" src="./nsqadmin_pychann.png" />
   </a>
+    <img width="800" src="./nsqadmin_counter_385.png" />
 </p>
 
 ## Project Tree
@@ -230,7 +228,7 @@ At github.com/victorabarros/nsq-service-self-driven you can se this project and 
 I hope you enjoy! =D
 
 <p align="center">
-    <img width="500" src="./thatsallfolks.png" />
+    <img width="500" src="https://media.giphy.com/media/xUPOqo6E1XvWXwlCyQ/giphy.gif" />
   </a>
 </p>
 
@@ -238,14 +236,8 @@ I hope you enjoy! =D
 
 - NSQ introduction in gophercon 2014 <https://youtu.be/CL_SUzXIUuI>
 - NSQ documentation <https://nsq.io/>
-  - nsqd server routes <https://nsq.io/components/nsqd.html#http-api>
-  - nsqlookupd server routes <https://nsq.io/components/nsqlookupd.html#http-interface>
-  - using docker-compose on nsq <https://nsq.io/deployment/docker.html#using-docker-compose>
-  - nsq client libraries <https://nsq.io/clients/client_libraries.html#client-libraries>
-- docker documentation <https://www.docker.com/>
-- how to install docker <https://docs.docker.com/engine/install/>
-  - manage docker as non root user <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>).
-  - how to install docker-compose <https://docs.docker.com/compose/install/>
-- nsq official docker image <https://hub.docker.com/r/nsqio/nsq>
-- nsq repository <https://github.com/nsqio/nsq>
-- github project <https://github.com/victorabarros/nsq-service-self-driven>
+- NSQ official docker image <https://hub.docker.com/r/nsqio/nsq>
+- Install docker <https://docs.docker.com/engine/install/>
+- Manage docker as non root user <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>).
+- Install docker-compose <https://docs.docker.com/compose/install/>
+- Github project <https://github.com/victorabarros/nsq-service-self-driven>
