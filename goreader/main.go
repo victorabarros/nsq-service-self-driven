@@ -16,7 +16,6 @@ func (h *myMessageHandler) HandleMessage(m *nsq.Message) error {
         return nil
     }
 
-    // TODO improve print as here
     fmt.Println(string(m.Body))  // TODO add utcnow and watch delay.
     return nil
 }

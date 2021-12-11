@@ -6,7 +6,8 @@ while true
 do
     NOW=$(date +%T)
     ID=$(uuidgen -r)
-    printf "\n${ID}-${NOW}\n"
-    curl -d "${ID} ${NOW}" "${URL}:${PORT}/pub?topic=${TOPIC_NAME}"
+    PAYLOAD="{\"id\":${ID},\"createdAt\":${NOW}}"
+    printf "\n${PAYLOAD}"
+    curl -s -d ${PAYLOAD} "${URL}:${PORT}/pub?topic=${TOPIC_NAME}"
     sleep 2
 done
