@@ -32,7 +32,7 @@ The NSQ is composed of 3 services:
 - **nsqadmin**
   - web UI to introspect the cluster
 
-Is possible to start all them from the same official docker images `nsqio/nsq`.
+It's possible to start all them from the same official docker images `nsqio/nsq`.
 
 ## Hands on
 
@@ -221,9 +221,10 @@ Or follow the counter here `http://localhost:4171/topics/tutorial/pychann` and r
 See how easy and quickly is develop an event system?
 
 NSQ is an elegant solution with super easy introduction.
-I highly recommend read more in its documentation how and study
+I highly recommend reading more in its documentation and studying more implementations.
 
 At github.com/victorabarros/nsq-service-self-driven you can see this project and more features, like Makefile and consumer written in Golang.
+Also, message tracking in different consumers.
 
 I hope you enjoy! =D
 
