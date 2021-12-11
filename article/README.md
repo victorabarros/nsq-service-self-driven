@@ -4,13 +4,9 @@
 
 On the last years, one of the most popular buzzword in the technology scenarios was **event**: Event sourcing pattern, event-driven programming, domain event pattern, event-driven architecture…
 And already exists tons of good content about these on internet and many tools to apply them.
-Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Go**, **Python** and **Docker/Docker-Compose**.
+Here I'll perform a tutorial to run the full stack of an event system, in less than 70 lines of code, with publisher and consumer using **shell**, **Python** and **Docker/Docker-Compose**.
 
 Ladies and Gentlemen, I introduce yourselves to **NSQ**, probably the simplest tool that can make your system event-friendly.
-<!-- _NSQ is a realtime distributed messaging platform_ ready to run in super easies steps. -->
-<!-- I'll not speend time explaining about NSQ and your features, the official documentation makes a great job. -->
-<!-- But, to make this case even more professional, let's use Docker
--->
 
 ## NSQ
 
@@ -49,7 +45,7 @@ Is possible start all them from the same official docker images `nsqio/nsq`.
 First create an directory to the project
 
 ```sh
-mkdir nsq-service-self-driven
+mkdir nsq-tutorial
 ```
 
 Inside that, write the `docker-compose.yml`:
@@ -58,13 +54,13 @@ Inside that, write the `docker-compose.yml`:
 version: "3"
 services:
   nsqlookupd:
-    image: nsqio/nsq
+    image: nsqio/nsq:v1.2.1
     command: /nsqlookupd
     ports:
       - "4160:4160"
       - "4161:4161"
   nsqd:
-    image: nsqio/nsq
+    image: nsqio/nsq:v1.2.1
     command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
     depends_on:
       - nsqlookupd
@@ -72,7 +68,7 @@ services:
       - "4150:4150"
       - "4151:4151"
   nsqadmin:
-    image: nsqio/nsq
+    image: nsqio/nsq:v1.2.1
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
     depends_on:
       - nsqlookupd
@@ -82,8 +78,10 @@ services:
 
 Now is possible to run `docker-compose up` and _voilá_ watch the nsqadmin on `http://localhost:4171/`.
 
+On **Counter** screen is possible follow the messages processed.
+
 <p align="center">
-    <img width="800" src="./nsqadmin_home.png" />
+    <img width="800" src="./nsqadmin_counter_0.png" />
   </a>
 </p>
 
@@ -106,12 +104,12 @@ Now we now how publish messages, let's code an script to automatize that.
 mkdir publisher
 ```
 
-On publisher directory, write `publisher/publish.sh`:
+On publisher directory, write `publisher/run.sh`:
 
 ```sh
 while true
 do
-    curl -d "{\"foo\":\"bar\"}" "nsqd:4151/pub?topic=hello_world"
+    curl -d "{\"foo\":\"bar\"}" "nsqd:4151/pub?topic=tutorial"
     sleep 1
 done
 ```
@@ -119,12 +117,12 @@ done
 And to host the service, write its `publisher/Dockerfile`:
 
 ```Dockerfile
-FROM alpine
+FROM alpine:3.15.0
 
-COPY ./publish.sh ./publish.sh
+COPY ./run.sh ./run.sh
 RUN apk add --no-cache curl
 
-ENTRYPOINT ["sh", "./publish.sh"]
+ENTRYPOINT ["sh", "./run.sh"]
 ```
 
 Add the new service to `docker-compose.yml` file
@@ -140,14 +138,19 @@ Now exec `docker-compose up` to start the project and see at `http://localhost:4
 
 [screenshot]
 
-### Step Three - Consumer
+### Step Three - Python Consumer
 
 NSQ has a lot of libaries to help on implementation.
 Let' start with python one:
 
+First create the directory on root of the project.
+
 ```sh
 mkdir pyreader
 ```
+
+The library make ower life much easier, these few lines is enougth to read the messages.
+Write the `pyreader/app.py`.
 
 ```py
 import nsq
@@ -161,34 +164,34 @@ if __name__ == "__main__":
     sys.stdout.flush()
     r = nsq.Reader(message_handler=handler,
                    lookupd_http_addresses=['nsqlookupd:4161'],
-                   topic="hello_world",
+                   topic="tutorial",
                    channel="pychann",
                    lookupd_poll_interval=15)
     nsq.run()
 ```
 
-`Dockerfile`:
+The `pyreader/Dockerfile`
 
 ```Dockerfile
-FROM python
+FROM python:3.10-slim
 
 COPY . .
-RUN pip3 install --no-cache pynsq
+RUN pip3 install --no-cache pynsq==0.9.1
 
 ENTRYPOINT ["python3"]
-CMD ["reader.py"]
+CMD ["app.py"]
 ```
 
-Add to .yml:
+Add the new service to `docker-compose.yml` file
 
 ```yml
-  consumer:
+  pyreader:
     build: ./pyreader/.
     depends_on:
       - publisher
 ```
 
-Now you can see the message published printing on console:
+Run `docker-compose build` and `docker-compose up` on root and now you can see the message published printing on console:
 
 <p align="center">
     <img width="800" src="./logs_with_pyreader.png" />
@@ -197,36 +200,39 @@ Now you can see the message published printing on console:
 
 Or follow the counter here `http://localhost:4171/topics/hello_world/pychann` and realtime in all channels here `http://localhost:4171/counter`.
 
-<!-- improve screenshot. aumentar fonte -->
 <p align="center">
-    <img width="800" src="./pyreader.png" />
+    <img width="800" src="./nsqadmin_pychann.png" />
   </a>
 </p>
 
 ## Project Tree
 
 ```md
-/nsq-project/
+/nsq-tutorial/
 |-- docker-compose.yml
-|-- pyreader/
-|   |-- Dockerfile
-|   |-- reader.py
 |-- publisher/
 |   |-- Dockerfile
-|   |-- publish.sh
+|   |-- run.sh
+|-- pyreader/
+|   |-- Dockerfile
+|   |-- app.py
 ```
 
 ## Conclusion
 
-<!--
-Como podemos ver, subir um projeto de ponta a ponta com NSQ leva menos de 70 linhas de código
--->
+See how easy and quickly is develop a event system?
 
-## More Informations
+NSQ is an elegant solution with super easy introduction.
+I highly recommend read more in its documetation how and study
 
-At github.com/victorabarros/nsq-service-self-driven you can se this same project with more funcionalities and with a consumer in go.
+At github.com/victorabarros/nsq-service-self-driven you can se this project and more features, like Makefile and consumer writenn in Golang.
 
 I hope you enjoy! =D
+
+<p align="center">
+    <img width="500" src="./thatsallfolks.png" />
+  </a>
+</p>
 
 ## References
 
