@@ -22,6 +22,12 @@ make log
 # follow logs
 ```
 
+<p align="center">
+    <img src="./assets/logs.png" />
+    <!-- Font: https://nsq.io/overview/design.html#simplifying-configuration-and-administration -->
+  </a>
+</p>
+
 ## License
 
 [MIT](LICENCE)
