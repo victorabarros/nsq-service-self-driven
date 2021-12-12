@@ -103,7 +103,9 @@ On publisher directory, write `publisher/run.sh`:
 ```sh
 while true
 do
-    curl -d "{\"foo\":\"bar\"}" "nsqd:4151/pub?topic=tutorial"
+    PAYLOAD="{\"id\":\"${$(uuidgen -r)}\",\"time\":\"${$(date +%T)}\"}"
+    printf "\n${PAYLOAD}"
+    curl -s -d ${PAYLOAD} "nsqd:4151/pub?topic=tutorial"
     sleep 1
 done
 ```
@@ -114,7 +116,7 @@ And to host the service, write its `publisher/Dockerfile`:
 FROM alpine:3.15.0
 
 COPY ./run.sh ./run.sh
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl util-linux
 
 ENTRYPOINT ["sh", "./run.sh"]
 ```
@@ -150,11 +152,12 @@ The library makes ower life much easier, these few lines are enough to read the 
 Write the `pyreader/app.py`.
 
 ```py
+from datetime import datetime
 import nsq
 import sys
 
 def handler(msg):
-    print(msg.body.decode(), flush=True)
+    print(msg.body.decode(), f"[{datetime.utcnow().strftime('%H:%M:%S.%f')}]", flush=True)
     return True
 
 if __name__ == "__main__":
