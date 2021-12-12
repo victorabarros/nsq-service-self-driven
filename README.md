@@ -1,4 +1,4 @@
-# NSQ SERVICE SELF.DRIVEN
+# NSQ SELF.DRIVEN
 
 [NSQ](https://nsq.io/) Self.Driven is an entire ecosystem in containers with publisher, message plataform and consumer.
 
