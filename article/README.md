@@ -103,7 +103,9 @@ On publisher directory, write `publisher/run.sh`:
 ```sh
 while true
 do
-    PAYLOAD="{\"id\":\"${$(uuidgen -r)}\",\"time\":\"${$(date +%T)}\"}"
+    ID=$(uuidgen -r)
+    NOW=$(date +%T)
+    PAYLOAD="{\"id\":${ID},\"time\":${NOW}}"
     printf "\n${PAYLOAD}"
     curl -s -d ${PAYLOAD} "nsqd:4151/pub?topic=tutorial"
     sleep 1
