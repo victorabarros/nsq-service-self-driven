@@ -1,4 +1,4 @@
-# NSQ with Docker in baby steps, less then 70 lines of code
+# NSQ with Docker in baby steps, in 70 lines of code
 
 ## Intro
 
