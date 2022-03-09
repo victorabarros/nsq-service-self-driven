@@ -26,13 +26,13 @@ When a publisher sends an event to the topic **clicks**, the message is cloned t
 The NSQ is composed of 3 services:
 
 - **nsqd**
-  - manage the messages
+  - the daemon that receives, queues, and delivers messages to clients
 - **nsqlookupd**
   - manages topology information and provides an eventually consistent discovery service
 - **nsqadmin**
   - web UI to introspect the cluster
 
-It's possible to start all them from the same official docker images `nsqio/nsq`.
+It's possible to start them all from the same official docker images `nsqio/nsq`.
 
 ## Hands on
 
@@ -142,7 +142,7 @@ Now exec `docker-compose up` to start the project and see at `http://localhost:4
 ### Step Three - Python Consumer
 
 NSQ has a lot of libraries to help with implementation.
-Let' start with python one:
+Let' starts with python3 one:
 
 First, create the directory on the root of the project.
 
@@ -150,7 +150,7 @@ First, create the directory on the root of the project.
 mkdir pyreader
 ```
 
-The library makes ower life much easier, these few lines are enough to read the messages.
+The library makes our life much easier, these few lines are enough to read the messages.
 Write the `pyreader/app.py`.
 
 ```py

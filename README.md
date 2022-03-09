@@ -1,6 +1,6 @@
 # NSQ SELF.DRIVEN
 
-[NSQ](https://nsq.io/) Self.Driven is an entire ecosystem in containers with publisher, message plataform and consumer.
+[NSQ](https://nsq.io/) Self.Driven is an entire ecosystem in containers with publisher, message platform and consumer.
 
 Article [NSQ with Docker in baby steps, less then 70 lines of code](https://github.com/victorabarros/nsq-service-self-driven/tree/master/article#readme)
 
@@ -31,3 +31,8 @@ make log
 ## License
 
 [MIT](LICENCE)
+
+<!-- 
+TODO:
+  - add code climate https://codeclimate.com/github/victorabarros/travel-routes-optimizer
+-->
