@@ -2,7 +2,7 @@
 
 [NSQ](https://nsq.io/) Self.Driven is an entire ecosystem in containers with publisher, message platform and consumer.
 
-Article [NSQ with Docker in baby steps, less then 70 lines of code](https://github.com/victorabarros/nsq-service-self-driven/tree/master/article#readme)
+Article [NSQ with Docker in baby steps, less then 70 lines of code](https://victoralmeidabarros.medium.com/nsq-with-docker-in-baby-steps-70-lines-of-code-381ac37eaf58)
 
 ## Usage
 
