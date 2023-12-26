@@ -20,18 +20,18 @@ welcome:
 
 remove-containers:
 	@echo "${YELLOW}killing containers${NOCOLOR}"
-	@docker rm -f nsq-service-self-driven_nsqadmin_1 \
-		nsq-service-self-driven_nsqd_1 \
-		nsq-service-self-driven_nsqlookupd_1 \
-		nsq-service-self-driven_publisher_1 \
-		nsq-service-self-driven_pyreader_1 \
-		nsq-service-self-driven_goreader_1
+	@docker rm -f nsq-service-self-driven-pyreader-1 \
+		nsq-service-self-driven-goreader-1 \
+		nsq-service-self-driven-nsqadmin-1 \
+		nsq-service-self-driven-nsqd-1 \
+		nsq-service-self-driven-publisher-1 \
+		nsq-service-self-driven-nsqlookupd-1
 
 remove-images:
 	@echo "${YELLOW}killing images${NOCOLOR}"
-	@docker rmi -f nsq-service-self-driven_publisher \
-		nsq-service-self-driven_pyreader \
-		nsq-service-self-driven_goreader
+	@docker rmi -f nsq-service-self-driven-publisher \
+		nsq-service-self-driven-pyreader \
+		nsq-service-self-driven-goreader
 
 clean-up: remove-containers remove-images
 
