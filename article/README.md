@@ -240,10 +240,10 @@ I hope you enjoy! =D
 
 ## References
 
-- NSQ introduction in gophercon 2014 <https://youtu.be/CL_SUzXIUuI>
-- NSQ documentation <https://nsq.io/>
-- NSQ official docker image <https://hub.docker.com/r/nsqio/nsq>
-- Install docker <https://docs.docker.com/engine/install/>
-- Manage docker as non root user <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>).
-- Install docker-compose <https://docs.docker.com/compose/install/>
-- Github project <https://github.com/victorabarros/nsq-service-self-driven>
+- NSQ introduction in gophercon 2014 [link](https://youtu.be/CL_SUzXIUuI)
+- NSQ documentation [link](https://nsq.io/)
+- NSQ official docker image [link](https://hub.docker.com/r/nsqio/nsq)
+- Install docker [link](https://docs.docker.com/engine/install/)
+- Manage docker as non root user [link](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
+- Install docker-compose [link](https://docs.docker.com/compose/install/)
+- Github victorabarros/nsq-service-self-driven project [link](https://github.com/victorabarros/nsq-service-self-driven)
