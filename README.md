@@ -1,4 +1,4 @@
-# NSQ SELF.DRIVEN
+# NSQ SELF DRIVEN 📨
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/2cb11164a1021862afd0/maintainability)](https://codeclimate.com/github/victorabarros/nsq-service-self-driven/maintainability)
 
@@ -28,4 +28,13 @@ make log
     <img src="./assets/logs.png" />
     <!-- Font: https://nsq.io/overview/design.html#simplifying-configuration-and-administration -->
   </a>
+</p>
+
+---
+
+<p align="center">
+  <br/>
+  Made in Brazil
+  <br/>
+  <img src="https://github.com/victorabarros/ura-bot/blob/main/assets/BrazilFlag.png" height="30px"/>
 </p>
