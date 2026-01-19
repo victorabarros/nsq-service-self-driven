@@ -7,6 +7,8 @@
 Article [NSQ with Docker in baby steps, less then 70 lines of code](https://victoralmeidabarros.medium.com/nsq-with-docker-in-baby-steps-70-lines-of-code-381ac37eaf58)
 
 ## Usage
+<!-- 
+## Usage
 
 `Makefile`
 
@@ -17,12 +19,17 @@ make clean-up
 make start
 # start docker-compose project
 
-make status
-# check status
-
 make log
-# follow logs
+# follow container logs
 ```
+-->
+
+<p align="center">
+    <img src="http://terminalgifapi.com/api/v1/gif/33363063-6134-3538-3634-326137373862" />
+  </a>
+</p>
+
+Container logs:
 
 <p align="center">
     <img src="./assets/logs.png" />
