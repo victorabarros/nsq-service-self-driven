@@ -25,7 +25,7 @@ make log
 -->
 
 <p align="center">
-    <img src="http://terminalgifapi.com/api/v1/gif/33363063-6134-3538-3634-326137373862" />
+    <img src="http://terminalgifapi.com/api/v1/gif?commands=%5B%22Set%20FontSize%2030%22%2C%22Set%20Height%20800%22%2C%22Type%20%5C%22clear%20%26%26%20curl%20-fsSL%20%27https%3A%2F%2Fraw.githubusercontent.com%2Fvictorabarros%2Fnsq-service-self-driven%2Frefs%2Fheads%2Fmaster%2FREADME.md%27%20%7C%20sed%20-n%20%2711%2C23p%27%5C%22%22%2C%22Sleep%202s%22%2C%22Enter%22%2C%22Sleep%2030s%22%5D" />
   </a>
 </p>
 
